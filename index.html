@@ -49,9 +49,13 @@
         }
         
         // Кнопка закрытия Web App
-        document.getElementById("closeButton").onclick = function() {
-            tg.close();
-        };
+        document.getElementById("closeButton").addEventListener("click", function() {
+    if (tg.isExpanded) {
+        tg.close(); // Закрытие Web App, если оно развернуто
+    } else {
+        alert("Закрытие не поддерживается в браузере.");
+    }
+});
 
         // Добавление основной кнопки Telegram
         tg.MainButton.setText("Продолжить");
