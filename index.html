@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Привет, <span id="username">Гость</span>!</h1>
+        <p>Добро пожаловать в наше Telegram Web App</p>
+        <button onclick="sendMessage()">Отправить сообщение</button>
+    </div><script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    
+    document.getElementById('username').innerText = tg.initDataUnsafe?.user?.first_name || 'Гость';
+    
+    function sendMessage() {
+        tg.sendData("Привет из Web App!");
+    }
+</script>
+
+</body>
+</html>
