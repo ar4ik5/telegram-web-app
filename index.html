@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,7 @@
             color: white;
             border: none;
             border-radius: 5px;
+            margin: 10px;
         }
     </style>
 </head>
@@ -33,16 +35,30 @@
         <h1>Привет, <span id="username">Гость</span>!</h1>
         <p>Добро пожаловать в наше Telegram Web App</p>
         <button onclick="sendMessage()">Отправить сообщение</button>
-    </div><script>
-    let tg = window.Telegram.WebApp;
-    tg.expand();
-    
-    document.getElementById('username').innerText = tg.initDataUnsafe?.user?.first_name || 'Гость';
-    
-    function sendMessage() {
-        tg.sendData("Привет из Web App!");
-    }
-</script>
+        <button id="closeButton">Закрыть</button>
+    </div>
 
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        document.getElementById('username').innerText = tg.initDataUnsafe?.user?.first_name || 'Гость';
+        
+        function sendMessage() {
+            tg.sendData("Привет из Web App!");
+        }
+        
+        // Кнопка закрытия Web App
+        document.getElementById("closeButton").onclick = function() {
+            tg.close();
+        };
+
+        // Добавление основной кнопки Telegram
+        tg.MainButton.setText("Продолжить");
+        tg.MainButton.show();
+        tg.MainButton.onClick(() => {
+            tg.sendData("Кнопка 'Продолжить' нажата!");
+        });
+    </script>
 </body>
 </html>
